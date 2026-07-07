@@ -4,7 +4,7 @@ interface RetryRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://bharat-bazar.onrender.com";
 
 const TOKEN_KEY = "admin_jwt";
 

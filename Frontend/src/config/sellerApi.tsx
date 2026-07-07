@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const sellerApi = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://bharat-bazar.onrender.com",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -34,7 +34,7 @@ sellerApi.interceptors.response.use(
 
       try {
         const response = await axios.post(
-          "http://localhost:3000/auth/access-token/seller",
+          "https://bharat-bazar.onrender.com/auth/access-token/seller",
           {},
           {
             withCredentials: true,
