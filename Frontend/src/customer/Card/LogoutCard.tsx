@@ -1,6 +1,9 @@
 import { Logout } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
+const handleLogout = () => {
+  console.log("Logout");
+};
 const LogoutCard = () => {
   return (
     <div>
