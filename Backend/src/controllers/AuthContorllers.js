@@ -133,10 +133,12 @@ class AuthControllers {
         method
       );
 
+      const isProduction = process.env.NODE_ENV === "production";
+
       res.cookie("refreshToken_admin", refreshToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
@@ -232,10 +234,12 @@ class AuthControllers {
 
   async adminLogout(req, res) {
     try {
+      const isProduction = process.env.NODE_ENV === "production";
+
       res.cookie("refreshToken_admin", "", {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "strict",
         expires: new Date(0),
       });
 
@@ -251,16 +255,18 @@ class AuthControllers {
 
   async sellerLogout(req, res) {
     try {
-      res.clearCookie("refreshToken_seller", {
+      const isProduction = process.env.NODE_ENV === "production";
+
+      res.cookie("refreshToken_seller", "", {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-        path: "/",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "strict",
+        expires: new Date(0),
       });
       return successResponse(
         res,
         200,
-        "Admin logged out successfully"
+        "Seller logged out successfully"
       );
     } catch (error) {
       return errorResponse(res, 500, error.message);

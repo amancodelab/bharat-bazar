@@ -18,11 +18,13 @@ class UserControllers {
 
         const { accessToken, refreshToken } = await VerifyEmailServices.verifyOtpForUser(otp, email, "login");
 
+        const isProduction = process.env.NODE_ENV === "production";
+
         res.cookie("refreshToken", refreshToken, {
           httpOnly: true,
-          secure: false,
-          sameSite: "lax",
-          maxAge: 7 * 24 * 60 * 60 * 1000
+          secure: isProduction,
+          sameSite: isProduction ? "none" : "strict",
+          maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         const user = await UserServices.getUserByEmail(email);
 
@@ -193,17 +195,19 @@ class UserControllers {
 
   async logout(req, res) {
     try {
-      res.cookie("refreshToken_admin", "", {
+      const isProduction = process.env.NODE_ENV === "production";
+
+      res.cookie("refreshToken", "", {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "strict",
         expires: new Date(0),
       });
 
       return successResponse(
         res,
         200,
-        "Admin logged out successfully"
+        "User logout successfully"
       );
     } catch (error) {
       return errorResponse(res, 500, error.message);
