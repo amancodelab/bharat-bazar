@@ -1,0 +1,27 @@
+const mongoose = require('mongoose');
+const HomeCategorySection = require('../domain/HomeCategorySection');
+
+const homeCategorySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  categoryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    required: true
+  },
+  section: {
+    type: String,
+    enum: Object.values(HomeCategorySection),
+    required: true
+  },
+}, { timestamps: true });
+
+const HomeCategory = mongoose.model("HomeCategory", homeCategorySchema);
+
+module.exports = HomeCategory;
