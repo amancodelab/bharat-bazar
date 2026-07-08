@@ -23,8 +23,8 @@ const UserRegister = () => {
 
   const allBanners = useAppSelector((state) => state.banner.banners);
   const loading = useAppSelector((state) => state.banner.loading);
-  const userBanner = allBanners.find(
-    (banner) => banner.role === UserRole.CUSTOMER,
+  const userBanner = allBanners?.find(
+    (banner) => banner?.role === UserRole.CUSTOMER,
   );
 
   const formik = useFormik({
@@ -44,7 +44,7 @@ const UserRegister = () => {
         );
 
         if (sendLoginOtp.fulfilled.match(result)) {
-          navigate(`/auth/user/verify/${values.email}`);
+          navigate(`/auth/user/verify/${values?.email}`);
         }
       } catch (error) {
         console.error(error);
@@ -53,7 +53,7 @@ const UserRegister = () => {
   });
 
   const isVerify = useAppSelector((state) => {
-    return state.userAuth.isAuthenticated;
+    return state?.userAuth?.isAuthenticated;
   });
 
   if (loading) {
@@ -139,7 +139,7 @@ const UserRegister = () => {
             <div className="w-full h-full">
               <img
                 className="sticky top-4 w-full h-full object-cover"
-                src={userBanner.image}
+                src={userBanner?.image}
                 alt="User Register"
               />
             </div>

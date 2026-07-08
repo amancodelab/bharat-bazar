@@ -18,8 +18,8 @@ const SellerRegister = () => {
 
   const [isLogin, setIsLogin] = useState(true);
   const allBanners = useAppSelector((state) => state.banner.banners);
-  const sellerBannner = allBanners.find(
-    (banner) => banner.role === UserRole.SELLER,
+  const sellerBannner = allBanners?.find(
+    (banner) => banner?.role === UserRole.SELLER,
   );
   const formik = useFormik({
     initialValues: {
@@ -95,11 +95,11 @@ const SellerRegister = () => {
             </h1>
 
             <h2 className="text-lg text-teal-600 font-semibold">
-              {sellerBannner.title}
+              {sellerBannner?.title}
             </h2>
 
             <p className="leading-6 text-sm text-gray-600 mt-4">
-              {sellerBannner.subtitle}
+              {sellerBannner?.subtitle}
             </p>
 
             <h1
@@ -131,7 +131,7 @@ const SellerRegister = () => {
         <div className="w-full h-full">
           <img
             className="sticky top-4 w-full h-full object-cover"
-            src={sellerBannner.image}
+            src={sellerBannner?.image}
             alt="Seller Register"
           />
         </div>
