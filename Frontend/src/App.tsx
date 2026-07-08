@@ -25,6 +25,7 @@ import {
   fetchSellerById,
   getSellerProfile,
 } from "./ReduxToolkit/Features/Seller/SellerSlice.tsx";
+import ErrorPage from "./Common/ErrorPage.tsx";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -61,6 +62,9 @@ function App() {
             <Route path="/*" element={<CustomerRoutes />} />
             <Route path="/auth/*" element={<AuthRoutes />} />
             <Route path="/admin/*" element={<AdminRoute />} />
+
+            {/* 404 Page */}
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>
       </ThemeProvider>
