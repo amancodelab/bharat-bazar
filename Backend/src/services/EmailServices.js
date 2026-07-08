@@ -1,23 +1,31 @@
 require("dotenv").config();
-
-const { Resend } = require("resend");
-console.log("✅ Using Resend Email Service");
-const resend = new Resend(process.env.RESEND_API_KEY);
+const nodemailer = require("nodemailer");
+console.log("🔥 EmailServices.js loaded");
+const transporter = nodemailer.createTransport({
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.BREVO_USER,
+    pass: process.env.BREVO_PASS,
+  },
+});
 
 const sendEmail = async (to, subject, text, html) => {
   try {
-    const response = await resend.emails.send({
-      from: "Bharat Bazar <onboarding@resend.dev>",
+
+    const info = await transporter.sendMail({
+      from: `Bharat Bazar <${process.env.BREVO_SENDER}>`,
       to,
       subject,
       text,
       html,
     });
 
-    console.log("Email sent successfully");
-    console.log(response);
+    console.log("✅ Email sent:", info.messageId);
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("❌ Email Error:");
+    console.error(error);
     throw error;
   }
 };

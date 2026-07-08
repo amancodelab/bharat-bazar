@@ -159,10 +159,11 @@ class UserControllers {
 
   async generatedOtpforLogin(req, res) {
     try {
+
       if (!req.body.email) {
         return errorResponse(res, 400, "missing the email");
       }
-      await VerifyEmailServices.generatedOtp(req.body.email, "login");
+      await VerifyEmailServices.generatedOtpForUser(req.body.email, "login");
       return successResponse(res, 201, "New Otp is Generated");
     } catch (error) {
       return errorResponse(res, 500, error.message);

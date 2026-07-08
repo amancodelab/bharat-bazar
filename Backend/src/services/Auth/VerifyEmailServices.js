@@ -11,6 +11,7 @@ const Cart = require('../../models/Cart');
 const AdminServies = require("../AdminServies");
 
 class VerifyEmailService {
+
   async generatedOtp(email, method = "create") {
     try {
       console.log("generated is method is running")
@@ -30,13 +31,14 @@ class VerifyEmailService {
       });
 
       //send Email 
+      console.log("Before the Email Send");
+
       await sendEmail(
         email,
         "Otp Verification for Bharat bazar",
         otp,
         html
       );
-
       return true
 
     } catch (error) {
@@ -64,14 +66,17 @@ class VerifyEmailService {
         otpHash,
       });
 
-      //send Email 
+      //send Email
+
+      console.log("Before the Email Send");
+
       await sendEmail(
         email,
         "Otp Verification for Bharat bazar",
         otp,
         html
       );
-
+      console.log("Succssfully otp had sent");
       return true
 
     } catch (error) {
