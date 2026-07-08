@@ -10,6 +10,7 @@ import SellerAccount from "../../seller/SellerPage/SellerAccount";
 import SellerLogout from "../../seller/SellerPage/SellerLogout";
 import SellerLayout from "./SellerLayout";
 import SellerTransaction from "../../seller/SellerPage/SellerTransation";
+import ErrorPage from "../../Common/ErrorPage";
 
 const SellerRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const SellerRoutes = () => {
           <Route path="transactions" element={<SellerTransaction />} />
           <Route path="account" element={<SellerAccount />} />
           <Route path="logout" element={<SellerLogout />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </>

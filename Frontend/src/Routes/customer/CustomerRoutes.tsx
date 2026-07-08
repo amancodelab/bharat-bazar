@@ -17,6 +17,7 @@ import ProductDetails from "../../customer/pages/ProductDetails/ProductDetails";
 import FullCard from "../../customer/Card/FullCard";
 import PaymentSuccess from "../../customer/Profile/PaymentSuccess";
 import UserAccount from "../../customer/pages/Auth/UserAccount";
+import ErrorPage from "../../Common/ErrorPage";
 
 const CustomerRoutes = () => {
   return (
@@ -47,6 +48,7 @@ const CustomerRoutes = () => {
           <Route path="addresses" element={<Addresses />} />
           <Route path="logout" element={<LogoutButton />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
 
       <Footer />

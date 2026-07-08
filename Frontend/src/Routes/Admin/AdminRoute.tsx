@@ -22,6 +22,7 @@ import EditCoupon from "../../admin/Coupon/EditCoupon";
 import SellerAccountChange from "../../admin/Seller/SellerAccountChange";
 import AdminLogin from "../../admin/pages/Auth/AdminLogin";
 import VerifyPage from "../../admin/pages/Auth/VerifyPage";
+import ErrorPage from "../../Common/ErrorPage";
 
 const AdminRoute = () => {
   return (
@@ -65,6 +66,7 @@ const AdminRoute = () => {
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/account" element={<Account />} />
           <Route path="/" element={<AdminHome />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </div>
