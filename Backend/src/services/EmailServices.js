@@ -1,45 +1,25 @@
 require("dotenv").config();
-const nodemailer = require("nodemailer");
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    type: "OAuth2",
-    user: process.env.EMAIL_USER,
-    clientId: process.env.GOOGLE_CILENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    refreshToken: process.env.REFRESH_TOKEN,
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-});
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.log(`Error connecting to Email server:${error.message}`);
-  } else {
-    console.error("Email server is ready to send the message");
-  }
-})
+const { Resend } = require("resend");
 
-// to send the Email
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async (to, subject, text, html) => {
   try {
-    const info = await transporter.sendMail({
-      from: `Bharat bazar <${process.env.EMAIL_USER}>`,
+    const response = await resend.emails.send({
+      from: "Bharat Bazar <onboarding@resend.dev>",
       to,
       subject,
       text,
-      html
+      html,
     });
 
-    console.log(`Message sent:${info.messageId}`);
+    console.log("Email sent successfully");
+    console.log(response);
   } catch (error) {
-    console.error(`Error sending email:`, error);
+    console.error("Error sending email:", error);
+    throw error;
   }
-}
+};
 
-module.exports = { transporter, sendEmail };
+module.exports = { sendEmail };
