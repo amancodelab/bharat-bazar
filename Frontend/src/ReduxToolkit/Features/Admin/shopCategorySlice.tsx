@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../../config/api";
+import adminApi from "../../../config/adminApi";
 
 const initialState = {
   shopCategories: [] as any[],
@@ -39,7 +40,7 @@ export const createShopCategory = createAsyncThunk(
   "shopCategory/create",
   async (request: any, { rejectWithValue }) => {
     try {
-      const response = await api.post("/shop-category/add", request);
+      const response = await adminApi.post("/shop-category/add", request);
 
       return response.data.data;
     } catch (error: any) {
@@ -62,7 +63,7 @@ export const updateShopCategory = createAsyncThunk(
     { rejectWithValue },
   ) => {
     try {
-      const response = await api.put(`/shop-category/update/${id}`, data);
+      const response = await adminApi.put(`/shop-category/update/${id}`, data);
 
       return response.data.data;
     } catch (error: any) {
@@ -76,7 +77,7 @@ export const deleteShopCategory = createAsyncThunk(
   "shopCategory/delete",
   async (id: string, { rejectWithValue }) => {
     try {
-      await api.delete(`/shop-category/delete/${id}`);
+      await adminApi.delete(`/shop-category/delete/${id}`);
 
       return id;
     } catch (error: any) {
